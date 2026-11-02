@@ -4,6 +4,13 @@ import habitantes.*
 describe "Imperio Inca" {
  
   test "Tareas de siembra" {
+    const siembraDePapa = new SiembraEnElValle(esfuerzo = 1.2, epoca = epocaDeSequia)
+    assert.equals(180, siembraDePapa.recursosProducidos(4))
+    assert.equals(420, siembraDePapa.recursosProducidos(10))
+
+    const siembraDeMaiz = new SiembraEnTerrazas(esfuerzo = 1.5, tipoJornada = bajoElSol)
+    assert.equals(900, siembraDeMaiz.recursosProducidos(5))
+    assert.equals(1125, siembraDeMaiz.recursosProducidos(7))
   }
 
 
