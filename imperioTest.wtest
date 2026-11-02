@@ -11,6 +11,13 @@ describe "Imperio Inca" {
     const siembraDeMaiz = new SiembraEnTerrazas(esfuerzo = 1.5, tipoJornada = bajoElSol)
     assert.equals(900, siembraDeMaiz.recursosProducidos(5))
     assert.equals(1125, siembraDeMaiz.recursosProducidos(7))
+
+    const rutaTamboCentral = new Mensaje(esfuerzo = 1.8)
+    assert.equals(270, rutaTamboCentral.recursosProducidos(4))
+
+    const caminoDelSapaInca = new MensajeImperial(esfuerzo = 1.7)
+    assert.equals(810, caminoDelSapaInca.recursosProducidos(10))
+
   }
 
 

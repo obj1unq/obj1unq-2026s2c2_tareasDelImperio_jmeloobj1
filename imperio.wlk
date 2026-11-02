@@ -1,10 +1,10 @@
 class Tarea{
     var property epoca = epocaDeLluvia
-    var property esfuerzo
+    const property esfuerzo
     var property tipoJornada = normal
     method desgaste(tiempo) 
     method recursosProducidos(tiempo) = 50 * (tiempo - self.desgaste(tiempo)) * esfuerzo
-    method horasExtra(tiempo) {
+    method horasExtra(tiempo){
       return if(tiempo > tipoJornada.tiempo()){
         tiempo - tipoJornada.tiempo()
       }else{
