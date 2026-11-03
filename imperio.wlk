@@ -1,9 +1,9 @@
 class Tarea{
     var property epoca = epocaDeLluvia
-    const property esfuerzo
     var property tipoJornada = normal
+    method esfuerzo()
     method desgaste(tiempo) 
-    method recursosProducidos(tiempo) = 50 * (tiempo - self.desgaste(tiempo)) * esfuerzo
+    method recursosProducidos(tiempo) = 50 * (tiempo - self.desgaste(tiempo)) * self.esfuerzo()
     method horasExtra(tiempo){
       return if(tiempo > tipoJornada.tiempo()){
         tiempo - tipoJornada.tiempo()
@@ -14,7 +14,7 @@ class Tarea{
 }
 
 class Siembra inherits Tarea{
-
+const property esfuerzo  
 override method desgaste(tiempo) = tipoJornada.desgaste(tiempo) + self.horasExtra(tiempo) 
 
 }
@@ -63,5 +63,5 @@ class Mensaje inherits Tarea{
 
 class MensajeImperial inherits Mensaje{
  override method esfuerzo() = 1.8
- override method desgaste(tiempo) = super(tiempo) - 2   
+ override method desgaste(tiempo) = (super(tiempo) - 2).max(1)   
 }
