@@ -65,3 +65,34 @@ class MensajeImperial inherits Mensaje{
  override method esfuerzo() = 1.8
  override method desgaste(tiempo) = (super(tiempo) - 2).max(1)   
 }
+
+
+class Ayllus{
+  const colcas 
+
+  method mejorColca(habitante) {
+    colcas.max({colca => colca.cantidadDeRecursos(habitante)})
+  }
+  
+  method colcasSuaves(habitante) {
+    colcas.filter({colca => colca.esColcaSuave(habitante)})
+  }
+
+  method tareasMasExigentes(habitante) {
+    colcas.filter({colca => colca.tareaMasExigente(habitante)})
+  }
+}
+
+class Colca{
+  const tareasDeColca
+
+  method cantidadDeRecursos(habitante) = tareasDeColca.sum({tarea => habitante.recursosQueProduce(tarea)})
+
+  method esColcaSuave(habitante) {
+    return tareasDeColca.any({tarea => habitante.recursosQueProduce(tarea) < 200})
+  }
+
+  method tareaMasExigente(habitante) {
+    return tareasDeColca.find({tarea => habitante.recursosQueProduce(tarea).max()})
+  }
+}

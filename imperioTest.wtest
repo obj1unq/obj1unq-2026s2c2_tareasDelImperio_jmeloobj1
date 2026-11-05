@@ -2,26 +2,61 @@ import imperio.*
 import habitantes.*
 
 describe "Imperio Inca" {
+  const siembraDePapa = new SiembraEnElValle(esfuerzo = 1.2, epoca = epocaDeSequia)
+  const siembraDeMaiz = new SiembraEnTerrazas(esfuerzo = 1.5, tipoJornada = bajoElSol)
+  const rutaTamboCentral = new Mensaje()
+  const caminoDelSapaInca = new MensajeImperial()
+
+  const cusi = new Campesino(energia = 100, tiempoDeTrabajo = 4)
+  const tupac = new Elite(energia = 200)
  
-  test "Tareas de siembra" {
-    const siembraDePapa = new SiembraEnElValle(esfuerzo = 1.2, epoca = epocaDeSequia)
+  test "Tareas de siembra y Mensajes" {
     assert.equals(180, siembraDePapa.recursosProducidos(4))
     assert.equals(420, siembraDePapa.recursosProducidos(10))
 
-    const siembraDeMaiz = new SiembraEnTerrazas(esfuerzo = 1.5, tipoJornada = bajoElSol)
+  
     assert.equals(900, siembraDeMaiz.recursosProducidos(5))
     assert.equals(1125, siembraDeMaiz.recursosProducidos(7))
 
-    const rutaTamboCentral = new Mensaje()
+  
     assert.equals(210, rutaTamboCentral.recursosProducidos(4))
     assert.equals(525, rutaTamboCentral.recursosProducidos(10))
 
-    const caminoDelSapaInca = new MensajeImperial()
+  
     assert.equals(270, caminoDelSapaInca.recursosProducidos(4))
     assert.equals(810, caminoDelSapaInca.recursosProducidos(10))
 
   }
 
+  test "habitantes siembraDePapa"{
+    cusi.realizarTarea(siembraDePapa)
+    assert.equals(82, cusi.energia())
+    
+  }
+
+test "ruta tambo central" {
+  cusi.realizarTarea(rutaTamboCentral)
+    assert.equals(79, cusi.energia())
+}
+
+test "cusi energia 15"{
+const cusi15 = new Campesino(energia = 15, tiempoDeTrabajo = 4)
+assert.throwsException({ cusi.realizarTarea(siembraDePapa) })
+}
 
 
+test "tupac siembraDePapa"{
+tupac.realizarTarea(siembraDeMaiz)
+assert.equals(tupac.energia(), 111.25)
+}
+
+test "tupac camino del sapa inca"{
+  tupac.realizarTarea(caminoDelSapaInca)
+  assert.equals(tupac.energia(), 137.5)
+}
+
+const aylluReal = new Ayllu(colcas = #{colcaAgricola, colcaCentral})  
+const colcaAgricola = new Colca(tareasDeColca = #{siembraDePapa, construccionDeAndenes})
+const colcaCentral = new Colca(tareasDeColca = #{rutaTamboCentral, caminoDelSapaInca}) 
+const construccionDeAndenes = new ()
 }
